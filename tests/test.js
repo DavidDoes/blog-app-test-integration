@@ -97,7 +97,21 @@ describe('Blogposts API resource', function(){
                   'id', 'title', 'author', 'content', 'created'
                 )
               })
+              resBlogpost = res.body.blogposts[0]
+              return Blogpost.findById(resBlogpost.id)
+            })
+            .then(function(blogpost){
+              //expect values in blogpost object to be same as in db
+              expect(resBlogpost.id).to.equal(blogpost.id)
+              expect(resBlogpost.title).to.equal(blogpost.title)
+              expect(resBlogpost.content).to.equal(blogpost.content)
+              expect(resBlogpost.created).to.equal(blogpost.created)
+              expect(resBlogpost.author).to.equal(blogpost.author)
             })
         })
+    })
+
+    describe('POST endpoint', function(){
+      
     })
 })
