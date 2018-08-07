@@ -68,16 +68,16 @@ describe('BlogPosts API resource', function(){
           // 3. prove number of blogposts get back is equal to number in db
           let res //declare here to give access to all .then()
           return chai.request(app)
-            .get('/posts')
-            .then(function(_res){
-              res = _res
-              expect(res).to.have.status(200)
-              expect(res.body.posts).to.have.lengthOf.at.least(1)
-              return BlogPosts.count()
-            })
-            .then(function(count){
-              expect(res.body.posts).to.have.lengthOf(count)
-            })
+              .get('/posts')
+              .then(function(_res){
+                  res = _res
+                  expect(res).to.have.status(200)
+                  expect(res.body).to.have.lengthOf.at.least(1)
+                  return BlogPost.count()
+              })
+              .then(function(count){
+                  expect(res.body).to.have.lengthOf(count)
+              })
         })
 
         it('should return blogposts with correct fields', function(){
