@@ -19,7 +19,7 @@ function seedBlogpostData(){
     const seedData = [] //empty array to populate
 
     for (let i=1; i<=10; i++){ //populate empty arr w/ Faker documents
-        seedData.push(generateBlogpostData()) 
+      seedData.push(generateBlogpostData()) 
     }
     //return Promise
     return BlogPost.insertMany(seedData)
@@ -28,13 +28,12 @@ function seedBlogpostData(){
 //seed documents created above with Faker data
 function generateBlogpostData(){
     return {
-        title: faker.lorem.words(),
+        title: faker.lorem.sentence(),
+        content: faker.lorem.paragraph(),
         author: {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName()
-    },
-        content: faker.lorem.paragraph(),
-        created: faker.date.past()
+        }
     }
 }
 
