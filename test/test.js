@@ -178,4 +178,27 @@ describe('BlogPosts API resource', function(){
           })
       })
     })
+
+    describe('DELETE endpoint', function(){
+      // 1. get blogpost
+      // 2. DELETE req for that id
+      // 3. make sure has correct status code
+      // 4. prove post with that id doesn't exist in db after delete
+      it ('deletes blogpost by id', function(){
+        let blogpost
+        return BlogPost
+          .findOne()
+          .then(function(_blogpost){
+            blogpost = _blogpost
+            return chai.request(app).delete(`/posts/${blogpost.id}`)
+          })
+          .then(function(res){
+            expect(res).to.have.status(204)
+            return BlogPost.findById(blogpost.id)
+          })
+          .then(function(_blogpost){
+            expect(_blogpost).to.be.null
+          })
+      })
+    })
 })
